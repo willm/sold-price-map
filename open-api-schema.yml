@@ -1,0 +1,59 @@
+swagger: "2.0"
+info:
+  description: "This api allows you to get property prices"
+  version: "1.0.0"
+  title: "Property prices api"
+host: "properties.someserver.com"
+tags:
+- name: "properties"
+  description: "in a given area"
+schemes:
+- "https"
+paths:
+  /properties:
+    get:
+      tags:
+      - "properties"
+      summary: "Returns a list of properties by relative price band"
+      operationId: "getProperties"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "properties"
+          schema:
+            $ref: "#/definitions/Properties"
+definitions:
+  Properties:
+    type: "object"
+    properties:
+      priceBands:
+        type: "array"
+        items:
+          $ref: "#/definitions/PriceBand"
+  PriceBand:
+    type: object
+    properties:
+      name:
+        type: string
+        example: "95% - 100%"
+      properties:
+        type: array
+        items:
+          $ref: "#/definitions/Property"
+  Property:
+    type: "object"
+    properties:
+      price:
+        type: number
+        example: 500000
+      coordonates:
+        type: object
+        properties:
+          x:
+            type: number
+            example: 10
+          y:
+            type: number
+            example: 23
