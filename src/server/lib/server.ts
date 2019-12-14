@@ -1,8 +1,12 @@
 import {createServer} from 'http';
-import {PropertiesResponse} from './properties';
+import {PropertiesResponse} from '../../common/properties';
 
 function respond(res, status: number, body?) {
-  res.writeHead(status, {'Content-Type': 'application/json'});
+  res.writeHead(status, {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Origin': '*'
+  });
   return res.end(JSON.stringify(body));
 }
 

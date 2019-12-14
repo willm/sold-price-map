@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "lib": ["es2015", "dom"],
+        "module": "es6",
+        "outFile": "./dist/client/static/script.js",
+        "allowJs": true,
+        "target": "es2015"
+    },
+    "include": [
+        "./src/common/**/*",
+        "./src/client/**/*"
+    ]
+}

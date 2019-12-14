@@ -3,7 +3,7 @@ interface Coordinates {
   y: number;
 }
 
-interface Property {
+export interface Property {
   price: number;
   coordinates: Coordinates;
 }

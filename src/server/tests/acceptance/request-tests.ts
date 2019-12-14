@@ -1,7 +1,7 @@
 import test from 'tape-async';
 import {server} from '../../lib/server';
 import supertest from 'supertest';
-import {PropertiesResponse} from '../../lib/properties';
+import {PropertiesResponse} from '../../../common/properties';
 const request = supertest(server());
 
 test('a request to an unknown url should return a 404 not found', async assert => {
@@ -17,6 +17,8 @@ test('a request to /properties should return a properties response', async asser
   const response = await request
     .get('/properties')
     .expect('Content-Type', 'application/json')
+    .expect('Access-Control-Allow-Origin', '*')
+    .expect('Access-Control-Allow-Methods', '*')
     .expect(200);
 
   const body: PropertiesResponse = response.body as unknown as PropertiesResponse;

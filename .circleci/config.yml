@@ -9,3 +9,6 @@ jobs:
       - run:
           name: test
           command: npm install && npm test
+      - run:
+          name: build client
+          command: npm run build-client
