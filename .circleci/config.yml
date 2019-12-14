@@ -1,0 +1,11 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/sold-price-map
+    docker:
+      - image: node:10.17.0-alpine
+    steps:
+      - checkout
+      - run:
+          name: test
+          command: npm install && npm test

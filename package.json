@@ -1,0 +1,22 @@
+{
+  "name": "sold-price-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run lint && tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "test": "npm run build && tape dist/tests/**/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.12.17",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "tape": "^4.11.0",
+    "tape-async": "^2.3.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3"
+  }
+}
