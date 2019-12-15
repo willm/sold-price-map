@@ -1,5 +1,4 @@
 import {createServer, ServerResponse} from 'http';
-import {PropertiesResponse} from '../../common/properties';
 import {mapProperties} from './properties-mapper';
 
 function respond(res: ServerResponse, status: number, body?: object) {
