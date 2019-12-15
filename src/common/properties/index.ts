@@ -8,7 +8,7 @@ export interface Property {
   coordinates: Coordinates;
 }
 
-interface PriceBand {
+export interface PriceBand {
   range: string;
   properties: Property[];
 }
