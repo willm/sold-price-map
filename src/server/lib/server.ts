@@ -1,7 +1,7 @@
-import {createServer} from 'http';
+import {createServer, ServerResponse} from 'http';
 import {PropertiesResponse} from '../../common/properties';
 
-function respond(res, status: number, body?) {
+function respond(res: ServerResponse, status: number, body?: object) {
   res.writeHead(status, {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': '*',
@@ -12,6 +12,9 @@ function respond(res, status: number, body?) {
 
 export function server() {
   return createServer((req, res) => {
+    if (req.method === 'options') {
+      return respond(res, 200, {});
+    }
     if (req.url === '/properties') {
       const response: PropertiesResponse = {
         priceBands: [

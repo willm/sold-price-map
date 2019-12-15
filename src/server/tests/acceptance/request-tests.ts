@@ -13,6 +13,13 @@ test('a request to an unknown url should return a 404 not found', async assert =
   assert.deepEqual(response.body, {message: 'not found'}, 'has expected body');
 });
 
+test('an options request should respond with a 200 ok', async assert => {
+  await request
+    .options('/properties')
+    .expect('Content-Type', 'application/json')
+    .expect(200);
+});
+
 test('a request to /properties should return a properties response', async assert => {
   const response = await request
     .get('/properties')
