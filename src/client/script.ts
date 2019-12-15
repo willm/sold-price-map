@@ -18,15 +18,15 @@ export async function main() {
     (properties, p) => properties.concat(p.properties),
     []
   );
-  const highestX: number = allProperties.reduce(
-    (x, p: Property) => Math.max(p.coordinates.x, x),
-    0
+  const highestCoorinate: Coordinates = allProperties.reduce(
+    (coordinate, property: Property) => {
+      return {
+        x: Math.max(coordinate.x, property.coordinates.x),
+        y: Math.max(coordinate.y, property.coordinates.y),
+      };
+    },
+    {x: 0, y: 0}
   );
-  const highestY: number = allProperties.reduce(
-    (y, p: Property) => Math.max(p.coordinates.y, y),
-    0
-  );
-  const highestCoorinate: Coordinates = {x: highestX, y: highestY};
   const drawProperty = propertyRenderer(canvas, highestCoorinate);
   data.priceBands.forEach(band => {
     band.properties.forEach(p => {
