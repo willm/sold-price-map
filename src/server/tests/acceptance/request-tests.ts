@@ -40,3 +40,10 @@ test('a request to /properties should return a properties response', async asser
   assert.equal(typeof coordinates.x, 'number', 'coordinate has an x position');
   assert.equal(typeof coordinates.y, 'number', 'coordinate has an y position');
 });
+
+test('if an error occurs, a 500 is returned', async assert => {
+  const brokenRequest = supertest(server('some-file-that-does-not-exist.txt'));
+  await brokenRequest
+    .get('/properties')
+    .expect(500);
+});
