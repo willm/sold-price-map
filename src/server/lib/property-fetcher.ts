@@ -1,5 +1,5 @@
 import {Property} from '../../common/properties';
-import {readFileSync, fstat} from 'fs';
+import {readFileSync} from 'fs';
 import {EOL} from 'os';
 
 export function fetchProperties(sourceFilePath: string): Property[] {

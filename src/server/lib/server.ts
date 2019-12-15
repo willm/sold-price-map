@@ -1,5 +1,7 @@
 import {createServer, ServerResponse} from 'http';
 import {mapProperties} from './properties-mapper';
+import {fetchProperties} from './property-fetcher';
+const propertiesFilePath = './data.txt';
 
 function respond(res: ServerResponse, status: number, body?: object) {
   res.writeHead(status, {
@@ -16,15 +18,7 @@ export function server() {
       return respond(res, 200, {});
     }
     if (req.url === '/properties') {
-      const response = mapProperties([
-        {
-          price: 500000,
-          coordinates: {
-            x: 20,
-            y: 50,
-          },
-        },
-      ]);
+      const response = mapProperties(fetchProperties(propertiesFilePath));
       return respond(res, 200, response);
     }
     return respond(res, 404, {message: 'not found'});
