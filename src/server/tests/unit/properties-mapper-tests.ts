@@ -2,36 +2,41 @@ import test from 'tape-async';
 import {
   Property,
   PropertiesResponse,
-  PriceBand,
 } from '../../../common/properties';
 
-interface PriceBandGroup {
-  low: PriceBand;
-  high: PriceBand;
+interface PriceRange {
+  lowerLimit: number;
+  upperLimit: number;
+  properties: Property[];
 }
 
 function mapProperties(properties: Property[]): PropertiesResponse {
   const mostExpensivePrice = properties.reduce((price, property) => {
     return property.price > price ? property.price : price;
   }, 0);
-  const propertiesByPriceBand: PriceBandGroup = properties.reduce(
-    (priceBands: PriceBandGroup, property: Property) => {
-      const percentageOfMostExpensiveProperty =
-        property.price / (mostExpensivePrice / 100);
-      if (percentageOfMostExpensiveProperty < 75) {
-        priceBands.low.properties.push(property);
-      } else {
-        priceBands.high.properties.push(property);
+
+  const ranges: PriceRange[] = [
+    {lowerLimit: 95, upperLimit: 100, properties: []},
+    {lowerLimit: 25, upperLimit: 75, properties: []},
+  ];
+
+  properties.forEach((property: Property) => {
+    const percentageOfMostExpensiveProperty =
+      property.price / (mostExpensivePrice / 100);
+    ranges.forEach(range => {
+      if (
+        percentageOfMostExpensiveProperty <= range.upperLimit &&
+        percentageOfMostExpensiveProperty >= range.lowerLimit
+      ) {
+        range.properties.push(property);
       }
-      return priceBands;
-    },
-    {
-      low: {range: '25% - 75%', properties: []},
-      high: {range: '95% - 100%', properties: []},
-    }
-  );
+    });
+  });
   return {
-    priceBands: [propertiesByPriceBand.high, propertiesByPriceBand.low],
+    priceBands: ranges.map(range => ({
+      properties: range.properties,
+      range: `${range.lowerLimit}% - ${range.upperLimit}%`,
+    })),
   };
 }
 
