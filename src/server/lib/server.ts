@@ -1,7 +1,7 @@
 import {createServer, ServerResponse} from 'http';
 import {mapProperties} from './properties-mapper';
 import {fetchProperties} from './property-fetcher';
-const propertiesFilePath = './data.txt';
+const propertiesFilePath = process.env.PROPERTY_DATA || './data.txt';
 
 function respond(res: ServerResponse, status: number, body?: object) {
   res.writeHead(status, {
