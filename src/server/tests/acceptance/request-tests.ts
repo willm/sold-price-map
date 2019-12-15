@@ -31,8 +31,8 @@ test('a request to /properties should return a properties response', async asser
   const body: PropertiesResponse = response.body as unknown as PropertiesResponse;
   assert.true(Array.isArray(body.priceBands), 'has price bands array');
   const priceBand = body.priceBands[0];
-  assert.equal(typeof priceBand.name, 'string', 'has price band name');
-  assert.true(body.priceBands[0].name.length > 0, 'price band name is not empty');
+  assert.equal(typeof priceBand.range, 'string', 'has price band name');
+  assert.true(body.priceBands[0].range.length > 0, 'price band name is not empty');
   assert.true(Array.isArray(priceBand.properties), 'price band has properties array');
   const property = priceBand.properties[0];
   assert.equal(typeof property.price, 'number', 'property has a price');

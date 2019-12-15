@@ -19,7 +19,7 @@ export function server() {
       const response: PropertiesResponse = {
         priceBands: [
           {
-            name: '95% - 100%',
+            range: '95% - 100%',
             properties: [
               {
                 price: 500000,

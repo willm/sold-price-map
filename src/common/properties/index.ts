@@ -9,7 +9,7 @@ export interface Property {
 }
 
 interface PriceBand {
-  name: string;
+  range: string;
   properties: Property[];
 }
 
