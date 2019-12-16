@@ -35,7 +35,7 @@ definitions:
   PriceBand:
     type: object
     properties:
-      name:
+      range:
         type: string
         example: "95% - 100%"
       properties:
